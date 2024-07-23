@@ -1,0 +1,16 @@
+{
+  "name": "rest-api-project",
+  "version": "1.0.0",
+  "description": "How to run and install application:\r 1. Open your terminal\r 2. Install the application, type: npm i express\r 3. Type: node app.js\r 4. Hit enter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

@@ -24,6 +24,22 @@ app.get("/activities", (req, res) => {
 
 })
 
+
+
+app.post("/activities", async (req, res) =>{
+  try{
+   const newObject = await req.body;
+   data.push(newObject);
+   res.status(200).json(data);
+  }
+  catch (error){
+    console.error(error);
+    res.status(400).send('Failed to fetch data')
+  }
+})
+
+
+// listens to the port 3000
 app.listen(3000, () => {
   console.log("Server is running on http://localhost:3000");
 });

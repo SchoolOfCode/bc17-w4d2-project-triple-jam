@@ -9,6 +9,7 @@ const PORT = 3000;
 
 // Use Helmet!
 app.use(helmet());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -24,13 +25,16 @@ app.get("/activities", (req, res) => {
 
 })
 
+let newactivity = {
+  "id": "54321234",
+  "date": Date.now(),
+  "activity_type": "run",
+  "activity_duration": "30"
+}
 
-
-app.post("/activities", async (req, res) =>{
-  try{
-   const newObject = await req.body;
-   data.push(newObject);
-   res.status(200).json(data);
+app.post("/activities", (req, res) =>{
+  try{ const addActive = (req.body.newactivity);
+    res.status(200).json({"success": true, addActive }); 
   }
   catch (error){
     console.error(error);

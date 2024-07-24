@@ -1,6 +1,9 @@
 import express from "express";
 import helmet from "helmet";
 import data from "./activities.js";
+import crypto from 'crypto';
+console.log(crypto.randomUUID());
+
 
 const app = express();
 const PORT = 3000;
@@ -31,7 +34,7 @@ app.post("/activities", (req, res) => {
   //Creating new object and adding 2 new properties
   const newActivity = {
     ...activity,
-    id: "54321234",
+    id: crypto.randomUUID(),
     date: Date.now(),
   };
 

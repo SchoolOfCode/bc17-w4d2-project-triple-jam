@@ -1,8 +1,6 @@
 import express from "express";
 import helmet from "helmet";
-import data from "./activities.json" with { type: "json" }
-
-// const sample = require('./sample.json');
+import data from "./activities.js";
 
 const app = express();
 const PORT = 3000;
@@ -17,31 +15,28 @@ app.get("/", (req, res) => {
 
 app.get("/activities", (req, res) => {
   try {
-  res.status(200).json({"status": true, data})
-} catch(error) {
-  console.error(error);
-  res.status(400).send('Failed to fetch data')
-}
-
-})
-
-let newactivity = {
-  "id": "54321234",
-  "date": Date.now(),
-  "activity_type": "run",
-  "activity_duration": "30"
-}
-
-app.post("/activities", (req, res) =>{
-  try{ const addActive = (req.body.newactivity);
-    res.status(200).json({"success": true, addActive }); 
-  }
-  catch (error){
+    res.status(200).json({ status: true, data });
+  } catch (error) {
     console.error(error);
-    res.status(400).send('Failed to fetch data')
+    res.status(400).send("Failed to fetch data");
   }
-})
+});
 
+app.post("/activities", (req, res) => {
+  const activity = req.body.newActivity;
+  // If no body is provided send response code 400
+  if (!activity) {
+    res.status(400).send("No data");
+  }
+  //Creating new object and adding 2 new properties
+  const newActivity = {
+    ...activity,
+    id: "54321234",
+    date: Date.now(),
+  };
+
+  res.status(200).send({ status: true, newActivity });
+});
 
 // listens to the port 3000
 app.listen(3000, () => {

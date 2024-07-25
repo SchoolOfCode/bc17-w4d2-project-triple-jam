@@ -41,7 +41,17 @@ app.post("/activities", (req, res) => {
   res.status(200).send({ status: true, newActivity });
 });
 
+// put handler
+
+app.put("/activities", (req, res) => {
+  const update = req.body.update;
+
+  res.send({update})
+})
+
+
+
 // listens to the port 3000
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("Server is running on http://localhost:3000");
 });

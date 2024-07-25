@@ -44,23 +44,67 @@ app.post("/activities", (req, res) => {
 
 // put handler
 
-app.put("/activities/:id", (req, res) => {
-  const update = req.body.update;
-  const id = req.params.id;
+// app.put("/activities/:id", (req, res) => {
+//   const update = req.body.update;
+//   const id = req.params.id;
 
-  const updatedActivity = {
-    ...update,
-    id: id,
-    activity_type: "flying high",
-    activity_duration: "20000",
-    date: Date.now(),
-  };
+//   const updatedActivity = {
+//     ...update,
+//     id: id,
+//     // activity_type: "flying high",
+//     // activity_duration: "20000",
+//     date: Date.now(),
+//   };
+//   // data.push(updatedActivity);
+//   res.send(updatedActivity);
+//   console.log(updatedActivity);
+//   console.log(data);
+// });
 
-  res.send(updatedActivity);
-  console.log(updatedActivity);
-});
+
 
 // listens to the port 3000
 app.listen(PORT, () => {
   console.log("Server is running on http://localhost:3000");
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// app.put("/activities/:id", (req, res) => {
+//   const update = req.body.update;
+//   const id = req.params.id;
+
+//   // To find something in an array, you need an index. This is an index finder.
+//   const activityIndex = data.findIndex(activity => activity.id === id);
+
+//     // Merge the existing activity with the update
+//     const updatedActivity = {
+//       // ...data[activityIndex],
+//       ...update,
+//       id: id,  // Ensure the id remains the same
+//       date: Date.now(),  // Update the date to the current timestamp
+//     };
+//     // Replace the old activity with the updated one
+//     data[activityIndex] = updatedActivity;
+
+//   res.send(updatedActivity);
+//   console.log(data);
+// });

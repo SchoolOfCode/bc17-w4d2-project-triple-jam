@@ -1,9 +1,8 @@
 import express from "express";
 import helmet from "helmet";
 import data from "./activities.js";
-import crypto from 'crypto';
+import crypto from "crypto";
 console.log(crypto.randomUUID());
-
 
 const app = express();
 const PORT = 3000;
@@ -37,7 +36,9 @@ app.post("/activities", (req, res) => {
     id: crypto.randomUUID(),
     date: Date.now(),
   };
-
+  //Push new object to activities array
+  data.push(newActivity);
+  console.log(data);
   res.status(200).send({ status: true, newActivity });
 });
 
@@ -55,11 +56,9 @@ app.put("/activities/:id", (req, res) => {
     date: Date.now(),
   };
 
-  res.send(updatedActivity)
-  console.log(updatedActivity)
-})
-
-
+  res.send(updatedActivity);
+  console.log(updatedActivity);
+});
 
 // listens to the port 3000
 app.listen(PORT, () => {

@@ -43,10 +43,20 @@ app.post("/activities", (req, res) => {
 
 // put handler
 
-app.put("/activities", (req, res) => {
+app.put("/activities/:id", (req, res) => {
   const update = req.body.update;
+  const id = req.params.id;
 
-  res.send({update})
+  const updatedActivity = {
+    ...update,
+    id: id,
+    activity_type: "flying high",
+    activity_duration: "20000",
+    date: Date.now(),
+  };
+
+  res.send(updatedActivity)
+  console.log(updatedActivity)
 })
 
 

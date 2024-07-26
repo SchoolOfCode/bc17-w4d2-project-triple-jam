@@ -15,15 +15,17 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+// GET handler
 app.get("/activities", (req, res) => {
   try {
-    res.status(200).json({ status: true, data });
+    res.status(200).json({ status: "success", data });
   } catch (error) {
     console.error(error);
     res.status(400).send("Failed to fetch data");
   }
 });
 
+// POST handler
 app.post("/activities", (req, res) => {
   const activity = req.body.newActivity;
   // If no body is provided send response code 400
@@ -39,76 +41,75 @@ app.post("/activities", (req, res) => {
   //Push new object to activities array
   data.push(newActivity);
   console.log(data);
-  res.status(200).send({ status: true, newActivity });
+  res.status(200).send({ status: "success", data });
 });
 
-// put handler
+// PUT handler
 app.put("/activities/:id", (req, res) => {
   const updateBody = req.body.update;
   const id = req.params.id;
   const index = data.findIndex(activity => activity.id === id);
-
-
-  const updatedActivity = {
+if (!id) {
+  res.status(400).send('Bad request')
+  return
+}
+const updatedActivity = {
     "id":id,
     "activity_submitted": Date.now(),
-    
     ...updateBody
   }
 
   data[index] = updatedActivity;
-  console.log(updatedActivity)
-  console.log(data)
-  // const variab = data[index] = update;
 
-  //grab data out of the array from postman
-
-
+  res.status(200).send( {status: "success", data})
 });
+
+
+
+// // DELETE handler
+// app.delete("/activities/:id", (req, res) => {
+//   // const deleteBody = req.body.delete
+//   const id = req.params.id;
+//   const index = data.findIndex(activity => activity.id === id);
+
+//   if (index === -1) {
+//     res.status(400).send('Booooo');
+//     return
+//   } else if (index >= 0) {
+//        data.splice(index, 1);
+//        }
+
+//   res.status(200).send({ data })
+//   console.log(data);
+// });
+
+// DELETE handler
+app.delete("/activities/:id", (req, res) => {
+  // const deleteBody = req.body.delete
+  const id = req.params.id;
+  const index = data.findIndex(activity => activity.id === id);
+
+       data.splice(index, 1);
+
+  res.status(200).send({ data })
+  console.log(data);
+});
+
+
+
+
+
+
+// app.delete("/api/notes/:id", function(req, res) {
+//   console.log("req params", req.params.id)
+//   const itemIndex = myArray.findIndex(({ id }) => id === req.params.id);
+//   if (itemIndex >= 0) {
+//     myArray.splice(itemIndex, 1);
+//   }
+// });
 
 
 // listens to the port 3000
 app.listen(PORT, () => {
   console.log("Server is running on http://localhost:3000");
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// app.put("/activities/:id", (req, res) => {
-//   const update = req.body.update;
-//   const id = req.params.id;
-
-//   // To find something in an array, you need an index. This is an index finder.
-//   const activityIndex = data.findIndex(activity => activity.id === id);
-
-//     // Merge the existing activity with the update
-//     const updatedActivity = {
-//       // ...data[activityIndex],
-//       ...update,
-//       id: id,  // Ensure the id remains the same
-//       date: Date.now(),  // Update the date to the current timestamp
-//     };
-//     // Replace the old activity with the updated one
-//     data[activityIndex] = updatedActivity;
-
-//   res.send(updatedActivity);
-//   console.log(data);
-// });

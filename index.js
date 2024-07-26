@@ -43,24 +43,28 @@ app.post("/activities", (req, res) => {
 });
 
 // put handler
+app.put("/activities/:id", (req, res) => {
+  const updateBody = req.body.update;
+  const id = req.params.id;
+  const index = data.findIndex(activity => activity.id === id);
 
-// app.put("/activities/:id", (req, res) => {
-//   const update = req.body.update;
-//   const id = req.params.id;
 
-//   const updatedActivity = {
-//     ...update,
-//     id: id,
-//     // activity_type: "flying high",
-//     // activity_duration: "20000",
-//     date: Date.now(),
-//   };
-//   // data.push(updatedActivity);
-//   res.send(updatedActivity);
-//   console.log(updatedActivity);
-//   console.log(data);
-// });
+  const updatedActivity = {
+    "id":id,
+    "activity_submitted": Date.now(),
+    
+    ...updateBody
+  }
 
+  data[index] = updatedActivity;
+  console.log(updatedActivity)
+  console.log(data)
+  // const variab = data[index] = update;
+
+  //grab data out of the array from postman
+
+
+});
 
 
 // listens to the port 3000
